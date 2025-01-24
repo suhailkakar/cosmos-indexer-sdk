@@ -6,6 +6,11 @@
         "should_ignore":  true
       },
       {
+        "type": "message_type_regex",
+        "message_type_regex": ".*cosmos.*",
+        "should_ignore":  true
+      },
+      {
         "type": "message_type",
         "message_type": "/sdk.auction.v1.MsgAuctionBid"
       }
