@@ -4,7 +4,7 @@ go 1.22.1
 
 require (
 	github.com/DefiantLabs/cosmos-indexer v0.0.0-20240613171139-077bdb0887f6
-	github.com/DefiantLabs/cosmos-indexer-modules/block-sdk v0.0.0-20240917021144-f5fdc1f5268a
+	github.com/DefiantLabs/cosmos-indexer-modules v0.0.0-20250124104958-6a86319f8b0a
 )
 
 require (
