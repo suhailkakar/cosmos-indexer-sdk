@@ -15,10 +15,10 @@ func main() {
 		log.Fatalf("Failed to register EVM message types. Err: %v", err)
 	}
 
-	log.Println("TAC EVM Indexer - Registered message types:")
-	log.Println("  ✅ /cosmos.evm.vm.v1.MsgEthereumTx")
-	log.Println("  ✅ /cosmos.evm.vm.v1.DynamicFeeTx") 
-	log.Println("  ✅ /cosmos.evm.vm.v1.LegacyTx")
+	log.Println("Registered EVM message types for TAC chain:")
+	log.Println("  - /cosmos.evm.vm.v1.MsgEthereumTx")
+	log.Println("  - /cosmos.evm.vm.v1.DynamicFeeTx") 
+	log.Println("  - /cosmos.evm.vm.v1.LegacyTx")
 
 	err = cmd.Execute()
 	if err != nil {
