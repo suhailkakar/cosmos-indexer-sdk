@@ -2,7 +2,7 @@
 require('dotenv').config();
 const { postgraphile } = require('postgraphile');
 const PgSimplifyInflectorPlugin = require('@graphile-contrib/pg-simplify-inflector');
-const PgAggregatesPlugin = require('@graphile/pg-aggregates');
+// Removed PgAggregatesPlugin due to compatibility issues
 const ConnectionFilterPlugin = require('postgraphile-plugin-connection-filter');
 
 // Database connection
@@ -66,7 +66,6 @@ const postgraphileOptions = {
   // Plugins for enhanced functionality
   appendPlugins: [
     PgSimplifyInflectorPlugin,     // Simplifies field names (removes unnecessary prefixes)
-    PgAggregatesPlugin,           // Adds aggregation functions (count, sum, avg, etc.)
     ConnectionFilterPlugin,        // Adds advanced filtering capabilities
     BlockchainPlugin              // Custom blockchain-specific functionality
   ],
@@ -78,7 +77,6 @@ const postgraphileOptions = {
   // Development features
   watchPg: process.env.NODE_ENV === 'development',
   showErrorStack: process.env.NODE_ENV === 'development',
-  extendedErrors: process.env.NODE_ENV === 'development' ? ['hint', 'detail', 'errcode'] : ['errcode'],
 
   // Performance and caching
   retryOnInitFail: true,
@@ -107,18 +105,19 @@ const postgraphileOptions = {
   legacyRelations: 'omit',      // Use modern relation names
   setofFunctionsContainNulls: false,
 
-  // Custom error formatting
-  handleErrors: (errors) => {
-    console.error('GraphQL Errors:', errors);
-    return errors;
-  }
+  // Error handling
+  extendedErrors: process.env.NODE_ENV === 'development' ? ['hint', 'detail', 'errcode'] : ['errcode']
 };
 
-// Create PostGraphile middleware
-const middleware = postgraphile(DATABASE_URL, 'public', postgraphileOptions);
+// Create Express server with PostGraphile
+const express = require('express');
+const app = express();
+
+// Add PostGraphile middleware
+app.use(postgraphile(DATABASE_URL, 'public', postgraphileOptions));
 
 // Start the server
-middleware.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('✅ GraphQL API is running!');
   console.log('');
   console.log('📚 Available endpoints:');
@@ -128,10 +127,10 @@ middleware.listen(process.env.PORT || 5000, () => {
   console.log('🔥 Enhanced features enabled:');
   console.log('   ✅ Auto-generated schema from PostgreSQL');
   console.log('   ✅ Advanced filtering and pagination');
-  console.log('   ✅ Aggregation functions (count, sum, avg)');
   console.log('   ✅ Real-time subscriptions');
   console.log('   ✅ Custom blockchain fields');
   console.log('   ✅ Enhanced GraphiQL IDE');
+  console.log('   ✅ Simplified field names');
   console.log('');
   console.log('💡 Ready to query your TAC blockchain data!');
 });
