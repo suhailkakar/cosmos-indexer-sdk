@@ -9,3 +9,17 @@ log.txt
 .env
 logs/
 parallel-configs/
+.cursor
+config-tac.toml
+evm-indexer/config-tac-evm.toml
+evm-indexer/readme.md
+generate_configs.sh
+launch_parallel.sh
+stop_parallel.sh
+tac-indexer.log
+evm-indexer/go.sum
+evm-indexer/tac-evm-indexer
+evm-indexer/tac-evm-indexer.log
+cosmos-indexer-evm
+tac-evm-indexer
+graphql-api/node_modules

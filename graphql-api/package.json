@@ -1,0 +1,32 @@
+{
+  "name": "tac-blockchain-graphql-api",
+  "version": "1.0.0",
+  "description": "GraphQL API for TAC Blockchain Cosmos Indexer Database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "graphql": "postgraphile -c postgres://myuser:mypassword@localhost:5432/mydb --watch --enhance-graphiql --dynamic-json --cors --port 5000",
+    "graphql-prod": "postgraphile -c postgres://myuser:mypassword@localhost:5432/mydb --enhance-graphiql --dynamic-json --cors --port 5000 --retry-on-init-fail"
+  },
+  "keywords": [
+    "graphql",
+    "blockchain",
+    "cosmos",
+    "tac",
+    "indexer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "@graphile/pg-aggregates": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "postgraphile": "^4.14.1",
+    "postgraphile-plugin-connection-filter": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
